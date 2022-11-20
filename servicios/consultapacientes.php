@@ -1,8 +1,9 @@
 <?php
-	//realizar la consulta
+//realizar la consulta
 
-	require 'conexion.php';
-	
+require 'conexion.php';
+
+try {
 	//prepare sentecia SQL
 	$sql = "SELECT * FROM paciente ORDER BY nombre, apellidos";
 
@@ -15,14 +16,15 @@
 	if ($consulta->num_rows == 0) {
 		throw new Exception("No hay datos", 20);
 	}
-
 	//extraer los datos 
 	$pacientes = mysqli_fetch_all($consulta, MYSQLI_ASSOC);
-	
-	$respuesta = ['00', $pacientes];
 
-	//$respuesta = [$codigo_error, $mensaje_error];
+	//incorporar el json de respuesta
+	$respuesta = ['30', $pacientes];
+} catch (Exception $e) {
+	$codigoError = $e->getCode();
+	$mensajeError = $e->getMessage();
+	$respuesta =  [$codigoError, $mensajeError];
+}
 
-	echo json_encode($respuesta);
-	
-?>
+echo json_encode($respuesta);

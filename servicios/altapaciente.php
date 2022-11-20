@@ -47,6 +47,7 @@ try {
 } catch (Exception $e) {
 	$codigoError = $e->getCode();
 	$error =  $codigoError . $e->getMessage();
+	//como el error de duplicado salta siempre ignorando el if anterior le añado este mensaje
 	if ($codigoError == 1062) {
 		$error .= "\nEl paciente ya existe en la base de datos";
 	}

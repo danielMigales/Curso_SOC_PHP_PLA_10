@@ -8,6 +8,7 @@ function altaPaciente() {
     let apellidos = document.querySelector('#apellidos').value
     let fechaingreso = document.querySelector('#fechaingreso').value
 
+    //validar si estan informados los datos
     try {
         if (nif == null || nif.length == 0) {
             throw ('Introduzca el numero de nif');
@@ -51,9 +52,12 @@ function altaPaciente() {
             }
         })
         .then(function (mensaje) {
+            //al recibir la respuesta se separan los dos primeros digitos que haran de codigo. Si equivale a 30 es alta correcta
             if (mensaje.substring(0, 2) == '30') {
+                //se imprime el mensaje sin el codigo
                 alert(mensaje.substring(2))
-                //document.getElementById('formulario').reset
+                //se borra el formulario
+                document.querySelector('#formulario').reset()
             }
             else {
                 alert('Error al realizar el alta del paciente')
