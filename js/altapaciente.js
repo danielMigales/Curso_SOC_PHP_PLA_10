@@ -2,13 +2,13 @@ document.getElementById('alta').onclick = altaPaciente
 
 function altaPaciente() {
 
-    try {
-        //recuperar los datos a enviar
-        let nif = document.querySelector('#nif').value.trim()
-        let nombre = document.querySelector('#nombre').value.trim()
-        let apellidos = document.querySelector('#apellidos').value.trim()
-        let fechaingreso = document.querySelector('#fechaingreso').value.trim()
+    //recuperar los datos a enviar
+    let nif = document.querySelector('#nif').value
+    let nombre = document.querySelector('#nombre').value
+    let apellidos = document.querySelector('#apellidos').value
+    let fechaingreso = document.querySelector('#fechaingreso').value
 
+    try {
         if (nif == null || nif.length == 0) {
             throw ('Introduzca el numero de nif');
         }
@@ -24,7 +24,6 @@ function altaPaciente() {
     } catch (error) {
         alert(error)
     }
-
 
     //informar del servicio php a invocar
     let url = 'servicios/altapaciente.php'
@@ -51,13 +50,13 @@ function altaPaciente() {
                 throw ('Algo ha ido mal en la petición')
             }
         })
-        .then(function (mensaje) {           
-            if (mensaje.substring(0, 2) == '00') {
+        .then(function (mensaje) {
+            if (mensaje.substring(0, 2) == '30') {
                 alert(mensaje.substring(2))
-                document.querySelector('formulario').reset
+                //document.getElementById('formulario').reset
             }
-            else{
-                alert(mensaje)
+            else {
+                alert('Error al realizar el alta del paciente')
             }
         })
         .catch(function (error) {

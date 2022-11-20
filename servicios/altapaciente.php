@@ -35,14 +35,21 @@ try {
 	$sql = "INSERT INTO paciente VALUES (NULL, '$nif', '$nombre', '$apellidos', '$fechaingreso', NULL)";
 	if (!mysqli_query($conexionHospital, $sql)) {
 		//comprobación de errores del sgbd
+		//esto no funciona en mi version
 		if ($conexionHospital->errno == 1062) {
 			throw new Exception("El paciente ya existe en la base de datos", 20);
 		}
 		//texto del error, código de error
 		throw new Exception($conexionHospital->error, $conexionHospital->errno);
+	} else {
+		throw new Exception('Alta efectuada', 30);
 	}
-	//mensaje de respuesta
-	echo json_encode('Alta efectuada');
 } catch (Exception $e) {
-	$mensajes =  $e->getMessage();
+	$codigoError = $e->getCode();
+	$error =  $codigoError . $e->getMessage();
+	if ($codigoError == 1062) {
+		$error .= "\nEl paciente ya existe en la base de datos";
+	}
 }
+//mensaje de respuesta
+echo $error;
