@@ -18,7 +18,6 @@ try {
 	}
 	//extraer los datos 
 	$pacientes = mysqli_fetch_all($consulta, MYSQLI_ASSOC);
-
 	//incorporar el json de respuesta
 	$respuesta = ['30', $pacientes];
 } catch (Exception $e) {

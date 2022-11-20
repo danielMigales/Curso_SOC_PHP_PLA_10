@@ -24,7 +24,7 @@ function consultaPacientes() {
                 //paso mensaje json a array js
                 var pacientes = mensaje[1]
                 //variable para crear la tabla
-                let tabla = "";
+                let tabla = "<tr><th>ID</th><th>NIF</th><th>NOMBRE</th><th>APELLIDOS</th><th>FECHA INGRESO</th></tr><br>";
                 //bucle que recorre el array y crea la tabla
                 for (i in pacientes) {
                     tabla += `<tr>`
@@ -47,5 +47,12 @@ function consultaPacientes() {
         .catch(function (error) {
             window.alert(error)
         })
+
+}
+
+function detallePaciente(idpaciente) {
+console.log(idpaciente)
+    sessionStorage.setItem('idpaciente', idpaciente)
+    window.location.href = 'hospital.php?mantenimiento'
 
 }
