@@ -41,7 +41,7 @@ function consultaPaciente() {
                     document.getElementById('nombre').value = `${paciente[1].nombre}`
                     document.getElementById('apellidos').value = `${paciente[1].apellidos}`
                     document.getElementById('fechaingreso').value = `${paciente[1].fechaingreso}`
-                    document.getElementById('fechaalta').value = `${paciente[1].fechaalta}`
+                    //document.getElementById('fechaalta').value = `${paciente[1].fechaalta}`
                 }
             } else {
                 throw ('Error al realizar la consulta de pacientes')

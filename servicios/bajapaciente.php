@@ -25,11 +25,17 @@ try {
 		throw new Exception("El paciente no existe", 30);
 	}
 
-	//mensaje de respuesta
-	$mensajes = 'Baja efectuada';
-
-	//redirigir a consulta
-	header("Location: hospital.php?consulta");
+	//si no hay errores
+	if (mysqli_query($conexionHospital, $sql)) {
+		//mensaje de respuesta
+		$codigoExito = '50';
+		$textoOK = 'Baja efectuada';
+		$mensajes = $codigoExito . $textoOK;
+		//redirigir a consulta
+		//header("Location: hospital.php?consulta");
+	}
 } catch (Exception $e) {
 	$mensajes =  $e->getMessage();
 }
+
+echo ($mensajes);

@@ -48,9 +48,12 @@ try {
 	if ($conexionHospital->affected_rows == 0) {
 		throw new Exception("El paciente no existe o no se han modificado datos", 30);
 	}
-
-	//mensaje de respuesta
-	$mensajes = 'Modificación efectuada';
+	if (mysqli_query($conexionHospital, $sql)) {
+		//mensaje de respuesta
+		$codigoExito = '50';
+		$textoOK = 'Modificación efectuada';
+		$mensajes = $codigoExito.$textoOK;
+	}
 } catch (Exception $e) {
 	$mensajes =  $e->getCode() . $e->getMessage();
 }
